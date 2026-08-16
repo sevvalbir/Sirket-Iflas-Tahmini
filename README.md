@@ -48,6 +48,7 @@ Projede **Company Bankruptcy Prediction** veri seti kullanılmıştır.
 Veri setindeki sınıfların belirgin şekilde dengesiz olması nedeniyle model geliştirme sürecinde **class imbalance** problemi ayrıca ele alınmıştır.
 
 0 → İflas etmedi
+
 1 → İflas etti
 
 ---
@@ -56,17 +57,27 @@ Veri setindeki sınıfların belirgin şekilde dengesiz olması nedeniyle model 
 Modelleme öncesinde veri seti üzerinde aşağıdaki işlemler gerçekleştirilmiştir:
 
 Veri setinin incelenmesi
+
 Sütun isimlerinin düzenlenmesi
+
 Eksik değerlerin kontrol edilmesi
+
 Duplicate kayıtların kontrol edilmesi
+
 Bağımlı ve bağımsız değişkenlerin ayrılması
+
 Eğitim ve test veri setlerinin oluşturulması
+
 Feature'ların ölçeklendirilmesi
+
 Sınıf dengesizliğinin incelenmesi
 
 Veri setinde:
+
 Eksik değer bulunmamaktadır.
+
 Duplicate kayıt bulunmamaktadır.
+
 Model eğitiminde toplam 95 bağımsız değişken kullanılmıştır.
 
 ---
@@ -87,10 +98,15 @@ olduğu için ciddi bir sınıf dengesizliği bulunmaktadır.
 Bu nedenle model değerlendirilirken yalnızca Accuracy metriğine odaklanılmamıştır.
 
 Özellikle:
+
 Precision
+
 Recall
+
 F1-Score
+
 ROC-AUC
+
 PR-AUC metrikleri dikkate alınmıştır.
 
 İflas tahmini probleminde Recall özellikle önemlidir. Çünkü gerçekten iflas edecek bir şirketin model tarafından gözden kaçırılması önemli bir hatadır.
@@ -106,12 +122,19 @@ RandomizedSearchCV
 F1-Score kullanılmıştır.
 
 En iyi parametreler:
+
 subsample = 0.8
+
 n_estimators = 300
+
 min_child_weight = 5
+
 max_depth = 6
+
 learning_rate = 0.03
+
 gamma = 0
+
 colsample_bytree = 0.7
 
 Bu optimizasyon sonucunda modelin özellikle azınlık sınıfındaki performansı iyileştirilmiştir.
@@ -123,12 +146,19 @@ Final XGBoost modeli test veri seti üzerinde değerlendirilmiştir.
 Classification threshold: 0.40 olarak belirlenmiştir.
 
 Test Sonuçları
+
 Metric	Score
+
 Accuracy	95.38%
+
 Precision	37.66%
+
 Recall	65.91%
+
 F1-Score	47.93%
+
 ROC-AUC	95.21%
+
 PR-AUC	47.63%
 
 Confusion Matrix:
@@ -145,15 +175,25 @@ XGBoost modelinin en önemli değişkenleri incelendiğinde finansal yapı ile d
 Model tarafından en önemli bulunan bazı feature'lar:
 
 Feature	Importance
+
 Continuous interest rate (after tax)	0.091695
+
 Borrowing dependency	0.054851
+
 Net Income to Total Assets	0.054115
+
 Persistent EPS in the Last Four Seasons	0.052764
+
 Per Share Net profit before tax (Yuan ¥)	0.039053
+
 Net worth/Assets	0.031478
+
 Debt ratio %	0.030024
+
 Net Value Per Share (C)	0.024496
+
 Retained Earnings to Total Assets	0.023767
+
 Equity to Liability	0.021011
 
 Bu sonuçlar modelin şirketlerin borçluluk, kârlılık, özkaynak ve faiz yükü gibi finansal yapılarını temsil eden değişkenlerden önemli ölçüde yararlandığını göstermektedir.
@@ -167,13 +207,17 @@ Modelin yalnızca Python kodu içerisinde çalışması yerine, kullanıcıları
 Dashboard üzerinden kullanıcı:
 
 Veri setindeki bir şirket kaydını seçebilir.
+
 Seçilen şirketin temel finansal göstergelerini görüntüleyebilir.
+
 TAHMİN HESAPLA butonuyla model tahmini gerçekleştirebilir.
+
 Tahmin edilen iflas olasılığını görebilir.
+
 Seçilen şirketin 95 feature değerini inceleyebilir.
 
-Dashboard'da kullanılan model:XGBoost
-ve sınıflandırma threshold değeri:0.40 olarak belirlenmiştir.
+
+Dashboard'da kullanılan model:XGBoost ve sınıflandırma threshold değeri:0.40 olarak belirlenmiştir.
 
 ---
 
