@@ -36,6 +36,22 @@ Bu proje kapsamında veri ön işleme, sınıflandırma, model optimizasyonu, s�
 
 Projede **Company Bankruptcy Prediction** veri seti kullanılmıştır.
 
+---
+
+##📂 Veri Seti Özellikleri
+
+- Toplam kayıt: 6.819
+- Feature sayısı: 95
+- Target: `Bankrupt?`
+- İflas eden şirket: 220
+- İflas etmeyen şirket: 6.599
+Veri setindeki sınıfların belirgin şekilde dengesiz olması nedeniyle model geliştirme sürecinde **class imbalance** problemi ayrıca ele alınmıştır.
+
+0 → İflas etmedi
+1 → İflas etti
+
+---
+
 ## 🔄 Veri Ön İşleme
 Modelleme öncesinde veri seti üzerinde aşağıdaki işlemler gerçekleştirilmiştir:
 
@@ -53,11 +69,15 @@ Eksik değer bulunmamaktadır.
 Duplicate kayıt bulunmamaktadır.
 Model eğitiminde toplam 95 bağımsız değişken kullanılmıştır.
 
+---
+
 ## 🤖 Kullanılan Model
 Projenin ana modeli:XGBoost
 XGBoost, özellikle sınıflandırma problemlerinde güçlü performans sağlayan gradient boosting tabanlı bir ensemble learning algoritmasıdır.
 Bu projede XGBoost tercih edilmesinin temel nedeni, finansal veriler gibi çok sayıda değişkene sahip veri setlerinde karmaşık ilişkileri öğrenebilmesi ve sınıflandırma performansının güçlü olmasıdır.
 Model geliştirme sürecinde sınıf dengesizliği de dikkate alınmıştır.
+
+---
 
 ## ⚖️ Class Imbalance
 Veri setinde iflas eden şirketlerin sayısı:220
@@ -74,6 +94,8 @@ ROC-AUC
 PR-AUC metrikleri dikkate alınmıştır.
 
 İflas tahmini probleminde Recall özellikle önemlidir. Çünkü gerçekten iflas edecek bir şirketin model tarafından gözden kaçırılması önemli bir hatadır.
+
+---
 
 ## 🔍 Model Optimizasyonu
 XGBoost modeli için hiperparametre optimizasyonu gerçekleştirilmiştir.
@@ -94,6 +116,7 @@ colsample_bytree = 0.7
 
 Bu optimizasyon sonucunda modelin özellikle azınlık sınıfındaki performansı iyileştirilmiştir.
 
+---
 
 ## 📈 Final Model Performansı
 Final XGBoost modeli test veri seti üzerinde değerlendirilmiştir.
@@ -115,6 +138,8 @@ Confusion Matrix:
 Bu sonuçlara göre model test setindeki 44 gerçek iflas vakasının 29'unu doğru şekilde tespit etmiştir.
 Bu nedenle iflas sınıfındaki Recall değeri: 65.91% olarak elde edilmiştir.
 
+---
+
 ## 🔎 Feature Importance
 XGBoost modelinin en önemli değişkenleri incelendiğinde finansal yapı ile doğrudan ilişkili değişkenlerin öne çıktığı görülmüştür.
 Model tarafından en önemli bulunan bazı feature'lar:
@@ -133,6 +158,7 @@ Equity to Liability	0.021011
 
 Bu sonuçlar modelin şirketlerin borçluluk, kârlılık, özkaynak ve faiz yükü gibi finansal yapılarını temsil eden değişkenlerden önemli ölçüde yararlandığını göstermektedir.
 
+---
 
 ## 🖥️ Streamlit Dashboard
 
@@ -148,6 +174,8 @@ Seçilen şirketin 95 feature değerini inceleyebilir.
 
 Dashboard'da kullanılan model:XGBoost
 ve sınıflandırma threshold değeri:0.40 olarak belirlenmiştir.
+
+---
 
 ## 🗂️ Proje Yapısı
 Sirket-Iflas-Tahmini/
@@ -179,6 +207,8 @@ Sirket-Iflas-Tahmini/
     ├── save_scaler.py
     └── train_models.py
 
+---
+
 ## 🛠️ Kullanılan Teknolojiler
 Python
 Pandas
@@ -190,6 +220,8 @@ Matplotlib
 Streamlit
 Jupyter Notebook
 Git & GitHub
+
+---
 
 ## 📊 Model Değerlendirme
 Model değerlendirmesinde özellikle Accuracy yerine sınıflandırma probleminin yapısına uygun metrikler dikkate alınmıştır.
