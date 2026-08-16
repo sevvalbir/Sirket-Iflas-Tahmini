@@ -211,14 +211,23 @@ Sirket-Iflas-Tahmini/
 
 ## 🛠️ Kullanılan Teknolojiler
 Python
+
 Pandas
+
 NumPy
+
 Scikit-learn
+
 XGBoost
+
 Joblib
+
 Matplotlib
+
 Streamlit
+
 Jupyter Notebook
+
 Git & GitHub
 
 ---
