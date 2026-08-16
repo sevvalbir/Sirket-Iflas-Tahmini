@@ -36,25 +36,6 @@ Bu proje kapsamında veri ön işleme, sınıflandırma, model optimizasyonu, s�
 
 Projede **Company Bankruptcy Prediction** veri seti kullanılmıştır.
 
-### Veri seti özellikleri
-
-- **Toplam kayıt:** 6.819
-- **Feature sayısı:** 95
-- **Target:** `Bankrupt?`
-- **İflas eden şirket:** 220
-- **İflas etmeyen şirket:** 6.599
-
-Veri setindeki sınıfların belirgin şekilde dengesiz olması nedeniyle model geliştirme sürecinde **class imbalance** problemi ayrıca ele alınmıştır.
-
-### Target Değişkeni
-
-```text
-Bankrupt?
-
-0 → İflas etmedi
-1 → İflas etti
-
-
 ## 🔄 Veri Ön İşleme
 Modelleme öncesinde veri seti üzerinde aşağıdaki işlemler gerçekleştirilmiştir:
 
