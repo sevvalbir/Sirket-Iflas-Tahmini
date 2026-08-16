@@ -178,6 +178,7 @@ ve sınıflandırma threshold değeri:0.40 olarak belirlenmiştir.
 ---
 
 ## 🗂️ Proje Yapısı
+```text
 Sirket-Iflas-Tahmini/
 │
 ├── dashboard.py
@@ -186,7 +187,6 @@ Sirket-Iflas-Tahmini/
 ├── data/
 │   ├── external/
 │   │   └── 3year.arff
-│   │
 │   └── raw/
 │       └── data.csv
 │
