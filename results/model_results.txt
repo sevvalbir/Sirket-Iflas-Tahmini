@@ -1,0 +1,277 @@
+============================================================
+ŞİRKET İFLAS TAHMİNİ PROJESİ
+FINAL MODEL SONUÇLARI
+============================================================
+
+
+1. VERİ SETİ
+------------------------------------------------------------
+
+Toplam gözlem sayısı : 6819
+Toplam özellik sayısı : 95
+Train gözlem sayısı : 5455
+Test gözlem sayısı : 1364
+
+Hedef değişken : Bankrupt?
+
+Sınıf dağılımı:
+0 - İflas olmayan şirketler : 6599
+1 - İflas eden şirketler    : 220
+
+Veri setinde ciddi bir sınıf dengesizliği bulunmaktadır.
+
+
+2. MODEL KARŞILAŞTIRMASI
+------------------------------------------------------------
+
+Logistic Regression:
+Accuracy  : 0.8783
+Precision : 0.1856
+Recall    : 0.8182
+F1-Score  : 0.3025
+ROC-AUC   : 0.9171
+PR-AUC    : 0.3190
+
+
+XGBoost:
+Accuracy  : 0.9699
+Precision : 0.5652
+Recall    : 0.2955
+F1-Score  : 0.3881
+ROC-AUC   : 0.9533
+PR-AUC    : 0.4711
+
+
+XGBoost + Class Imbalance:
+Accuracy  : 0.9611
+Precision : 0.4262
+Recall    : 0.5909
+F1-Score  : 0.4952
+ROC-AUC   : 0.9513
+PR-AUC    : 0.4792
+
+
+Random Forest + Class Imbalance:
+Accuracy  : 0.9677
+Precision : 0.5000
+Recall    : 0.4545
+F1-Score  : 0.4762
+ROC-AUC   : 0.9470
+PR-AUC    : 0.4629
+
+
+3. CLASS IMBALANCE
+------------------------------------------------------------
+
+XGBoost modelinde sınıf dengesizliğini azaltmak amacıyla
+scale_pos_weight kullanılmıştır.
+
+Scale Pos Weight : 29.99
+
+Bu değer, eğitim verisindeki çoğunluk sınıfının
+azınlık sınıfına oranından hesaplanmıştır.
+
+
+4. THRESHOLD OPTIMIZATION
+------------------------------------------------------------
+
+Threshold değerleri 0.10 ile 0.70 arasında test edilmiştir.
+
+İlk threshold analizinde en yüksek F1-Score:
+
+Threshold : 0.40
+Precision : 0.3947
+Recall    : 0.6818
+F1-Score  : 0.5000
+
+
+5. THRESHOLD CROSS VALIDATION
+------------------------------------------------------------
+
+Threshold seçiminin tek bir train/test ayrımına bağlı
+olmaması amacıyla StratifiedKFold kullanılarak 5-fold
+Cross Validation uygulanmıştır.
+
+Sonuç:
+
+Threshold : 0.40
+Mean Precision : 0.3789
+Mean Recall    : 0.5511
+Mean F1-Score  : 0.4472
+
+Bu sonuç doğrultusunda final threshold değeri:
+
+0.40
+
+
+6. HYPERPARAMETER OPTIMIZATION
+------------------------------------------------------------
+
+Öncelikle RandomizedSearchCV kullanılmıştır.
+
+RandomizedSearchCV sonucunda:
+
+F1-Score : 0.4379
+
+Daha sonra GridSearchCV ve StratifiedKFold kullanılarak
+daha kontrollü bir hyperparameter optimization uygulanmıştır.
+
+GridSearchCV sonucunda:
+
+Cross Validation F1-Score : 0.4405
+
+
+En iyi parametreler:
+
+n_estimators       : 250
+max_depth           : 5
+learning_rate       : 0.03
+min_child_weight    : 5
+subsample           : 0.8
+colsample_bytree    : 0.7
+gamma               : 0
+
+
+7. FINAL MODEL
+------------------------------------------------------------
+
+Final model:
+
+XGBoost + Class Imbalance
+
+Hyperparameter optimization:
+GridSearchCV
+
+Cross Validation:
+StratifiedKFold (5 folds)
+
+Final Threshold:
+0.40
+
+
+8. FINAL MODEL - TEST SET RESULTS
+------------------------------------------------------------
+
+Confusion Matrix:
+
+[[1272   48]
+ [  15   29]]
+
+
+Threshold : 0.40
+
+Accuracy  : 0.9538
+Precision : 0.3766
+Recall    : 0.6591
+F1-Score  : 0.4793
+ROC-AUC   : 0.9521
+PR-AUC    : 0.4763
+
+
+Classification Report:
+
+Class 0:
+Precision : 0.99
+Recall    : 0.96
+F1-Score  : 0.98
+Support   : 1320
+
+Class 1:
+Precision : 0.38
+Recall    : 0.66
+F1-Score  : 0.48
+Support   : 44
+
+
+9. FINAL MODEL YORUMU
+------------------------------------------------------------
+
+Model, iflas eden şirketleri tespit etme konusunda yüksek
+recall değerine ulaşmıştır.
+
+Final modelin iflas sınıfı için recall değeri 0.6591'dir.
+Bu değer, test setindeki gerçek iflas eden şirketlerin
+yaklaşık %66'sının model tarafından doğru şekilde
+tespit edildiğini göstermektedir.
+
+Precision değerinin 0.3766 olması, iflas olarak tahmin
+edilen şirketlerin tamamının gerçekten iflas etmediğini
+göstermektedir.
+
+Bu projede iflas eden şirketleri kaçırmamak önemli olduğu
+için recall, accuracy değerinden daha önemli bir
+performans göstergesi olarak değerlendirilmiştir.
+
+ROC-AUC değerinin 0.9521 olması modelin sınıfları ayırt
+etme gücünün yüksek olduğunu göstermektedir.
+
+PR-AUC değerinin 0.4763 olması ise sınıf dengesizliği
+bulunan bu veri setinde modelin azınlık sınıfını ayırt
+etme performansının değerlendirilmesi açısından önemlidir.
+
+
+10. FEATURE IMPORTANCE
+------------------------------------------------------------
+
+Final model tarafından en önemli bulunan ilk 20 değişken:
+
+1. Continuous interest rate (after tax)
+2. Borrowing dependency
+3. Net Income to Total Assets
+4. Persistent EPS in the Last Four Seasons
+5. Per Share Net profit before tax (Yuan ¥)
+6. Net worth/Assets
+7. Debt ratio %
+8. Net Value Per Share (C)
+9. Retained Earnings to Total Assets
+10. Equity to Liability
+11. Total income/Total expense
+12. Interest Expense Ratio
+13. Total debt/Total net worth
+14. Cash/Current Liability
+15. ROA(C) before interest and depreciation before interest
+16. Degree of Financial Leverage (DFL)
+17. Net Income to Stockholder's Equity
+18. Net Value Per Share (B)
+19. Revenue Per Share (Yuan ¥)
+20. Net Value Per Share (A)
+
+
+11. KAYDEDİLEN MODEL
+------------------------------------------------------------
+
+Final XGBoost modeli joblib kullanılarak models klasörü
+içerisine kaydedilmiştir.
+
+Model dosyası:
+
+best_xgb_model.pkl
+
+
+12. PROJE DURUMU
+------------------------------------------------------------
+
+Veri ön işleme tamamlandı.
+
+Model karşılaştırması tamamlandı.
+
+Class imbalance işlemi tamamlandı.
+
+Threshold optimization tamamlandı.
+
+Threshold Cross Validation tamamlandı.
+
+Hyperparameter optimization tamamlandı.
+
+GridSearchCV ile final model seçimi tamamlandı.
+
+Final model test seti üzerinde değerlendirildi.
+
+Confusion Matrix, ROC Curve ve Precision-Recall Curve
+grafikleri oluşturuldu.
+
+Feature Importance analizi tamamlandı.
+
+Bir sonraki aşamada modelin gerçek hayatta kullanılabilirliğini
+test etmek amacıyla yapay olmayan, bağımsız bir şirket
+finansal veri seti araştırılacaktır.
