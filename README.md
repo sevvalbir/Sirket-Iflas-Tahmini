@@ -206,7 +206,7 @@ Sirket-Iflas-Tahmini/
     ├── predict.py
     ├── save_scaler.py
     └── train_models.py
-
+```
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
