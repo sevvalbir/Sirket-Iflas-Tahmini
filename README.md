@@ -55,7 +55,7 @@ Bankrupt?
 1 → İflas etti
 
 
-🔄 Veri Ön İşleme
+## 🔄 Veri Ön İşleme
 Modelleme öncesinde veri seti üzerinde aşağıdaki işlemler gerçekleştirilmiştir:
 
 Veri setinin incelenmesi
@@ -72,13 +72,13 @@ Eksik değer bulunmamaktadır.
 Duplicate kayıt bulunmamaktadır.
 Model eğitiminde toplam 95 bağımsız değişken kullanılmıştır.
 
-🤖 Kullanılan Model
+## 🤖 Kullanılan Model
 Projenin ana modeli:XGBoost
 XGBoost, özellikle sınıflandırma problemlerinde güçlü performans sağlayan gradient boosting tabanlı bir ensemble learning algoritmasıdır.
 Bu projede XGBoost tercih edilmesinin temel nedeni, finansal veriler gibi çok sayıda değişkene sahip veri setlerinde karmaşık ilişkileri öğrenebilmesi ve sınıflandırma performansının güçlü olmasıdır.
 Model geliştirme sürecinde sınıf dengesizliği de dikkate alınmıştır.
 
-⚖️ Class Imbalance
+## ⚖️ Class Imbalance
 Veri setinde iflas eden şirketlerin sayısı:220
 iflas etmeyen şirketlerin sayısı ise:6599
 
@@ -94,7 +94,7 @@ PR-AUC metrikleri dikkate alınmıştır.
 
 İflas tahmini probleminde Recall özellikle önemlidir. Çünkü gerçekten iflas edecek bir şirketin model tarafından gözden kaçırılması önemli bir hatadır.
 
-🔍 Model Optimizasyonu
+## 🔍 Model Optimizasyonu
 XGBoost modeli için hiperparametre optimizasyonu gerçekleştirilmiştir.
 
 Kullanılan optimizasyon sürecinde:
@@ -114,7 +114,7 @@ colsample_bytree = 0.7
 Bu optimizasyon sonucunda modelin özellikle azınlık sınıfındaki performansı iyileştirilmiştir.
 
 
-📈 Final Model Performansı
+## 📈 Final Model Performansı
 Final XGBoost modeli test veri seti üzerinde değerlendirilmiştir.
 Classification threshold: 0.40 olarak belirlenmiştir.
 
@@ -134,7 +134,7 @@ Confusion Matrix:
 Bu sonuçlara göre model test setindeki 44 gerçek iflas vakasının 29'unu doğru şekilde tespit etmiştir.
 Bu nedenle iflas sınıfındaki Recall değeri: 65.91% olarak elde edilmiştir.
 
-🔎 Feature Importance
+## 🔎 Feature Importance
 XGBoost modelinin en önemli değişkenleri incelendiğinde finansal yapı ile doğrudan ilişkili değişkenlerin öne çıktığı görülmüştür.
 Model tarafından en önemli bulunan bazı feature'lar:
 
@@ -153,7 +153,7 @@ Equity to Liability	0.021011
 Bu sonuçlar modelin şirketlerin borçluluk, kârlılık, özkaynak ve faiz yükü gibi finansal yapılarını temsil eden değişkenlerden önemli ölçüde yararlandığını göstermektedir.
 
 
-🖥️ Streamlit Dashboard
+## 🖥️ Streamlit Dashboard
 
 Modelin yalnızca Python kodu içerisinde çalışması yerine, kullanıcıların modeli interaktif şekilde kullanabilmesi amacıyla bir Streamlit dashboard geliştirilmiştir.
 
@@ -168,7 +168,7 @@ Seçilen şirketin 95 feature değerini inceleyebilir.
 Dashboard'da kullanılan model:XGBoost
 ve sınıflandırma threshold değeri:0.40 olarak belirlenmiştir.
 
-🗂️ Proje Yapısı
+## 🗂️ Proje Yapısı
 Sirket-Iflas-Tahmini/
 │
 ├── dashboard.py
@@ -198,7 +198,7 @@ Sirket-Iflas-Tahmini/
     ├── save_scaler.py
     └── train_models.py
 
-🛠️ Kullanılan Teknolojiler
+## 🛠️ Kullanılan Teknolojiler
 Python
 Pandas
 NumPy
@@ -210,7 +210,7 @@ Streamlit
 Jupyter Notebook
 Git & GitHub
 
-📊 Model Değerlendirme
+## 📊 Model Değerlendirme
 Model değerlendirmesinde özellikle Accuracy yerine sınıflandırma probleminin yapısına uygun metrikler dikkate alınmıştır.
 Recall, gerçek iflas eden şirketlerin ne kadarının doğru şekilde tespit edildiğini gösterdiği için bu proje açısından önemli bir metriktir.
 Precision, modelin iflas edeceğini tahmin ettiği şirketlerin ne kadarının gerçekten iflas ettiğini gösterir.
